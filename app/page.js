@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import DataTable from "./components/DataTable";
 import ChartComponent from "./components/ChartComponent";
 import PieChartComponent from "./components/PieChartComponent";
-import DoubleBarChartComponent from "./components/DoubleBarChartComponent";
 
 export default function Home() {
   // State for discount data
@@ -19,9 +18,6 @@ export default function Home() {
 
   // State for voided/cancelled data
   const [voidedData, setVoidedData] = useState([]);
-
-  // State for price changes data
-  const [priceChangesData, setPriceChangesData] = useState([]);
 
   // Shared state
   const [loading, setLoading] = useState(true);
@@ -111,19 +107,6 @@ export default function Home() {
           );
         }
         setVoidedData(voidedResult.data);
-
-        // Fetch price changes data
-        const priceChangesResponse = await fetch("/api/getPriceChanges");
-        if (!priceChangesResponse.ok) {
-          throw new Error(`HTTP error! Status: ${priceChangesResponse.status}`);
-        }
-        const priceChangesResult = await priceChangesResponse.json();
-        if (!priceChangesResult.success) {
-          throw new Error(
-            priceChangesResult.error || "Failed to fetch price changes data"
-          );
-        }
-        setPriceChangesData(priceChangesResult.data);
       } catch (err) {
         console.error("Error fetching data:", err);
         setError(err.message);
@@ -234,22 +217,15 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Box 4 - Price Changes Chart */}
-              <div className="bg-white rounded-lg shadow-md overflow-hidden md:col-span-3">
+              {/* Box 4 - Placeholder */}
+              <div className="bg-white rounded-lg shadow-md overflow-hidden">
                 <div className="p-2 border-b border-gray-200">
-                  <h3 className="font-bold text-black text-lg">
-                    Product Price Changes (Last 30 Days)
-                  </h3>
+                  <h3 className="font-bold text-black">Weekly Sales Trend</h3>
                 </div>
-                <div className="h-[500px]">
-                  <DoubleBarChartComponent
-                    data={priceChangesData}
-                    labelField="Product Name"
-                    previousValueField="Min Price (£)"
-                    currentValueField="Max Price (£)"
-                    title="Previous vs Current Prices"
-                    height={480}
-                  />
+                <div className="h-80 flex items-center justify-center bg-gray-50">
+                  <p className="text-black font-semibold">
+                    Future visualization
+                  </p>
                 </div>
               </div>
 
@@ -303,9 +279,59 @@ export default function Home() {
                   />
                 </div>
               </div>
+
+              {/* Remaining placeholder boxes */}
+              {Array.from({ length: 3 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-lg shadow-md overflow-hidden"
+                >
+                  <div className="p-2 border-b border-gray-200">
+                    <h3 className="font-bold text-black">
+                      Visualization {index + 7}
+                    </h3>
+                  </div>
+                  <div className="h-80 flex items-center justify-center bg-gray-50">
+                    <p className="text-black font-semibold">
+                      Future visualization
+                    </p>
+                  </div>
+                </div>
+              ))}
             </div>
 
-            {/* Data Tables Section - Removed as requested */}
+            {/* Data Tables Section */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              {/* Discount Data Table */}
+              <div>
+                <h2 className="text-xl font-bold mb-2 text-black">
+                  Product Sales Data
+                </h2>
+                <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                  <DataTable data={discountData} />
+                </div>
+              </div>
+
+              {/* Best Sellers Data Table */}
+              <div>
+                <h2 className="text-xl font-bold mb-2 text-black">
+                  Best Sellers Data
+                </h2>
+                <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                  <DataTable data={bestSellersData} />
+                </div>
+              </div>
+
+              {/* Voided/Cancelled Data Table */}
+              <div>
+                <h2 className="text-xl font-bold mb-2 text-black">
+                  Voided Items Data
+                </h2>
+                <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                  <DataTable data={voidedData} />
+                </div>
+              </div>
+            </div>
           </>
         )}
       </div>
