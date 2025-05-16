@@ -18,15 +18,15 @@ export async function GET() {
       ...record.fields,
     }));
 
-    // Sort by Total Price in descending order (if it exists)
+    // Sort by Units Sold in descending order (if it exists)
     data = data.sort((a, b) => {
-      // Try to sort by Total Price first
-      if ("Total Price" in a && "Total Price" in b) {
-        return b["Total Price"] - a["Total Price"];
-      }
-      // If Total Price doesn't exist, try Units Sold
-      else if ("Units Sold" in a && "Units Sold" in b) {
+      // Try to sort by Units Sold first
+      if ("Units Sold" in a && "Units Sold" in b) {
         return b["Units Sold"] - a["Units Sold"];
+      }
+      // If Units Sold doesn't exist, try Total Price
+      else if ("Total Price" in a && "Total Price" in b) {
+        return b["Total Price"] - a["Total Price"];
       }
       // Fallback to any numeric field
       else {

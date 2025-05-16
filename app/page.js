@@ -14,7 +14,7 @@ export default function Home() {
   // State for best sellers data
   const [bestSellersData, setBestSellersData] = useState([]);
   const [bestSellersXAxis, setBestSellersXAxis] = useState("Product Name");
-  const [bestSellersYAxis, setBestSellersYAxis] = useState("Total Price");
+  const [bestSellersYAxis, setBestSellersYAxis] = useState("Units Sold");
 
   // State for voided/cancelled data
   const [voidedData, setVoidedData] = useState([]);
@@ -78,8 +78,8 @@ export default function Home() {
           if ("Product Name" in bestSellersResult.data[0]) {
             setBestSellersXAxis("Product Name");
           }
-          if ("Total Price" in bestSellersResult.data[0]) {
-            setBestSellersYAxis("Total Price");
+          if ("Units Sold" in bestSellersResult.data[0]) {
+            setBestSellersYAxis("Units Sold");
           } else {
             // Find first numeric field for y-axis
             const firstNumericField = Object.keys(
