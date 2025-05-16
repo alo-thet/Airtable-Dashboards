@@ -233,7 +233,7 @@ export default function Home() {
               <div className="bg-white rounded-lg shadow-md overflow-hidden md:col-span-2">
                 <div className="p-2 border-b border-gray-200 flex justify-between items-center">
                   <h3 className="font-bold text-black text-lg">
-                    Revenue by Product
+                    Best Selling Product
                   </h3>
                   <div className="flex space-x-2">
                     <select
