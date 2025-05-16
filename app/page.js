@@ -148,88 +148,7 @@ export default function Home() {
           <>
             {/* Bento Box Grid Layout with minimal gaps */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-2 mb-4">
-              {/* First Box - Discount Chart spanning two grid spaces (1-2) */}
-              <div className="bg-white rounded-lg shadow-md overflow-hidden md:col-span-2">
-                <div className="p-2 border-b border-gray-200 flex justify-between items-center">
-                  <h3 className="font-bold text-black text-lg">
-                    Product Discount
-                  </h3>
-                  <div className="flex space-x-2">
-                    <select
-                      value={discountXAxis}
-                      onChange={(e) => setDiscountXAxis(e.target.value)}
-                      className="text-xs px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-blue-500 focus:border-blue-500 font-semibold text-black"
-                    >
-                      <option value="" disabled>
-                        X-Axis
-                      </option>
-                      {getDiscountFields().map((field) => (
-                        <option key={field} value={field}>
-                          {field.charAt(0).toUpperCase() +
-                            field.slice(1).replace(/([A-Z])/g, " $1")}
-                        </option>
-                      ))}
-                    </select>
-
-                    <select
-                      value={discountYAxis}
-                      onChange={(e) => setDiscountYAxis(e.target.value)}
-                      className="text-xs px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-blue-500 focus:border-blue-500 font-semibold text-black"
-                    >
-                      <option value="" disabled>
-                        Y-Axis
-                      </option>
-                      {getDiscountFields().map((field) => (
-                        <option key={field} value={field}>
-                          {field.charAt(0).toUpperCase() +
-                            field.slice(1).replace(/([A-Z])/g, " $1")}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-                <div className="h-96">
-                  <ChartComponent
-                    data={discountData}
-                    xAxis={discountXAxis}
-                    yAxis={discountYAxis}
-                    title={`${discountYAxis} by ${discountXAxis}`}
-                    height={400}
-                  />
-                </div>
-              </div>
-
-              {/* Box 3 - Voided Items Pie Chart */}
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="p-2 border-b border-gray-200">
-                  <h3 className="font-bold text-black">
-                    Voided Items by Operator
-                  </h3>
-                </div>
-                <div className="h-80">
-                  <PieChartComponent
-                    data={voidedData}
-                    labelField="Operator Name"
-                    valueField="Voided Items"
-                    title="Voided Items Distribution"
-                    height={300}
-                  />
-                </div>
-              </div>
-
-              {/* Box 4 - Placeholder */}
-              <div className="bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="p-2 border-b border-gray-200">
-                  <h3 className="font-bold text-black">Weekly Sales Trend</h3>
-                </div>
-                <div className="h-80 flex items-center justify-center bg-gray-50">
-                  <p className="text-black font-semibold">
-                    Future visualization
-                  </p>
-                </div>
-              </div>
-
-              {/* Second Chart - Best Sellers spanning boxes 5-6 */}
+              {/* First Box - Best Sellers Chart spanning two grid spaces (1-2) */}
               <div className="bg-white rounded-lg shadow-md overflow-hidden md:col-span-2">
                 <div className="p-2 border-b border-gray-200 flex justify-between items-center">
                   <h3 className="font-bold text-black text-lg">
@@ -275,6 +194,87 @@ export default function Home() {
                     xAxis={bestSellersXAxis}
                     yAxis={bestSellersYAxis}
                     title={`${bestSellersYAxis} by ${bestSellersXAxis}`}
+                    height={400}
+                  />
+                </div>
+              </div>
+
+              {/* Box 3 - Voided Items Pie Chart */}
+              <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div className="p-2 border-b border-gray-200">
+                  <h3 className="font-bold text-black">
+                    Voided Items by Operator
+                  </h3>
+                </div>
+                <div className="h-80">
+                  <PieChartComponent
+                    data={voidedData}
+                    labelField="Operator Name"
+                    valueField="Voided Items"
+                    title="Voided Items Distribution"
+                    height={300}
+                  />
+                </div>
+              </div>
+
+              {/* Box 4 - Placeholder */}
+              <div className="bg-white rounded-lg shadow-md overflow-hidden">
+                <div className="p-2 border-b border-gray-200">
+                  <h3 className="font-bold text-black">Weekly Sales Trend</h3>
+                </div>
+                <div className="h-80 flex items-center justify-center bg-gray-50">
+                  <p className="text-black font-semibold">
+                    Future visualization
+                  </p>
+                </div>
+              </div>
+
+              {/* Second Chart - Discount Chart spanning boxes 5-6 */}
+              <div className="bg-white rounded-lg shadow-md overflow-hidden md:col-span-2">
+                <div className="p-2 border-b border-gray-200 flex justify-between items-center">
+                  <h3 className="font-bold text-black text-lg">
+                    Units Sold by Product
+                  </h3>
+                  <div className="flex space-x-2">
+                    <select
+                      value={discountXAxis}
+                      onChange={(e) => setDiscountXAxis(e.target.value)}
+                      className="text-xs px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-blue-500 focus:border-blue-500 font-semibold text-black"
+                    >
+                      <option value="" disabled>
+                        X-Axis
+                      </option>
+                      {getDiscountFields().map((field) => (
+                        <option key={field} value={field}>
+                          {field.charAt(0).toUpperCase() +
+                            field.slice(1).replace(/([A-Z])/g, " $1")}
+                        </option>
+                      ))}
+                    </select>
+
+                    <select
+                      value={discountYAxis}
+                      onChange={(e) => setDiscountYAxis(e.target.value)}
+                      className="text-xs px-2 py-1 border border-gray-300 rounded focus:outline-none focus:ring-blue-500 focus:border-blue-500 font-semibold text-black"
+                    >
+                      <option value="" disabled>
+                        Y-Axis
+                      </option>
+                      {getDiscountFields().map((field) => (
+                        <option key={field} value={field}>
+                          {field.charAt(0).toUpperCase() +
+                            field.slice(1).replace(/([A-Z])/g, " $1")}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div className="h-96">
+                  <ChartComponent
+                    data={discountData}
+                    xAxis={discountXAxis}
+                    yAxis={discountYAxis}
+                    title={`${discountYAxis} by ${discountXAxis}`}
                     height={400}
                   />
                 </div>
