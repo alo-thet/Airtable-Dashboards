@@ -11,10 +11,33 @@ const table = base(process.env.VOIDED_CANCELLED_COUNT_TABLE);
 export async function GET() {
   try {
     const records = await table.select().all();
-    const data = records.map((record) => ({
+
+    // Map and extract the data
+    let data = records.map((record) => ({
       id: record.id,
       ...record.fields,
     }));
+
+    // Sort by Voided Items in descending order
+    data = data.sort((a, b) => {
+      // Try to sort by Voided Items first
+      if ("Voided Items" in a && "Voided Items" in b) {
+        return b["Voided Items"] - a["Voided Items"];
+      }
+      // Fallback to any numeric field
+      else {
+        const numericKeys = Object.keys(a).filter(
+          (key) => typeof a[key] === "number" && key !== "id"
+        );
+
+        if (numericKeys.length > 0) {
+          const firstNumericKey = numericKeys[0];
+          return b[firstNumericKey] - a[firstNumericKey];
+        }
+
+        return 0;
+      }
+    });
 
     return NextResponse.json({ success: true, data });
   } catch (error) {
