@@ -238,7 +238,7 @@ export default function Home() {
               <div className="bg-white rounded-lg shadow-md overflow-hidden md:col-span-3">
                 <div className="p-2 border-b border-gray-200">
                   <h3 className="font-bold text-black text-lg">
-                    Product Price Changes (Last 30 Days)
+                    Product Price Changes
                   </h3>
                 </div>
                 <div className="h-[500px]">
